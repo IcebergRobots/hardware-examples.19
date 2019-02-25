@@ -1,0 +1,2 @@
+Der EEPROM wird über I2C angesprochen, hierzu kann die Eeprom24C04_16 Bibliothek verwendet werden.
+Der EEPROM hat eine Write Cycle Time von 5ms, d.h. beim Auslesen des Speichers ist zu beachten, dass die Daten frühestens nach 5ms zur Verfügung stehen.
