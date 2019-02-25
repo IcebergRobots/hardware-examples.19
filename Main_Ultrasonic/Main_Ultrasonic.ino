@@ -50,7 +50,7 @@ void loop() {
   
   Serial.print(" - 2.Echo: ");
   Wire.beginTransmission(ADDRESS); 
-  Wire.write(byte(0x04));      // Register des 2. Echos wird angesprochen; es stehen insgesamt 17 echos zur Verfügung jeweils an Register (2 + #Echo*2)
+  Wire.write(byte(0x04));      // Register des 2. Echos wird angesprochen; es stehen insgesamt 17 echos zur Verfügung jeweils an Register (#Echo*2)
   Wire.endTransmission();      
   Wire.requestFrom(ADDRESS, 2);  // result besteht aus 2 Bytes
   
