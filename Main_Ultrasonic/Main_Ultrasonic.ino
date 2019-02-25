@@ -1,5 +1,15 @@
 #include <Wire.h>
 
+/*
+ * Adressen:
+ *   _________      __________   
+ *  /224   232\    /0xE0  0xE8\ 
+ * |           |  |            |
+ * |226     230|  |0xE2    0xE6|
+ *  \         /    \          /
+ *    --228--        --0xE4--
+ */
+
 #define ADDRESS 112                 //Aus irgendeinem Grund die Hälfte der angegebenen Adresse
 
 void setup() {
@@ -9,7 +19,9 @@ void setup() {
   Wire.beginTransmission(ADDRESS);
   Wire.write(byte(0x02));           //Register zuim Einstellen der Reichweite
   Wire.write(byte(70));             //Reichweite wird auf ~3m gesetzt, dadurch sind die Messwerte nach 21ms verfügbar
-  Wire.endTransmission();      
+  Wire.endTransmission();   
+
+  //changeAddress(112, 0xE8);
 }
 
 int reading = 0;
@@ -40,7 +52,7 @@ void loop() {
   Wire.beginTransmission(ADDRESS); 
   Wire.write(byte(0x04));      // Register des 2. Echos wird angesprochen; es stehen insgesamt 17 echos zur Verfügung jeweils an Register (2 + #Echo*2)
   Wire.endTransmission();      
-  Wire.requestFrom(ADDRESS, 2);  
+  Wire.requestFrom(ADDRESS, 2);  // result besteht aus 2 Bytes
   
   if (2 <= Wire.available()) { 
     reading = Wire.read();  
@@ -55,7 +67,7 @@ void loop() {
 }
 
 
-/*
+
 
 // The following code changes the address of a Devantech Ultrasonic Range Finder (SRF10 or SRF08)
 // usage: changeAddress(0x70, 0xE6);
@@ -82,5 +94,3 @@ void changeAddress(byte oldAddress, byte newAddress)
   Wire.write(newAddress);
   Wire.endTransmission();
 }
-
-*/
